@@ -8,7 +8,7 @@ const showDownload = (result) => {
 const download = (callback) => {
   return new Promise((resolve, reject) => {
     setTimeout(function () {
-      callback("windows-10.exe");
+      resolve(callback("windows-10.exe"));
     }, second(3));
   });
 };
