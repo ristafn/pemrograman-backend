@@ -16,9 +16,9 @@ class Students {
     });
   }
 
-  static create(nama) {
+  static create(nama, nim, email, jurusan, created_at, updated_at) {
     return new Promise((resolve, reject) => {
-      const sql = `INSERT INTO data_students (id, nama) VALUES(NULL, '${nama}')`;
+      const sql = `INSERT INTO data_students (id, nama, nim, email, jurusan, created_at, updated_at) VALUES(NULL, '${nama}', '${nim}', '${email}', '${jurusan}', '${created_at}', '${updated_at}')`;
 
       db.query(sql, (err, result) => {
         if (err) {

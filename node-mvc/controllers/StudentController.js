@@ -12,8 +12,8 @@ class StudentController {
   }
 
   async store(req, res) {
-    const { nama } = req.body;
-    Students.create(nama);
+    const { nama, nim, email, jurusan, created_at, updated_at } = req.body;
+    Students.create(nama, nim, email, jurusan, created_at, updated_at);
     const students = await Students.all();
 
     const data = {
