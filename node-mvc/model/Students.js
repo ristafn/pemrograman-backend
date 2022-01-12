@@ -9,7 +9,6 @@ class Students {
         if (err) {
           reject(err);
         } else {
-          console.log(result);
           resolve(result);
         }
       });
@@ -42,7 +41,7 @@ class Students {
       });
     });
 
-    const student = this.find(id);
+    const student = await this.find(id);
 
     return student;
   }
