@@ -1,25 +1,36 @@
 const Students = require("../model/Students");
 
 class StudentController {
-  errResponse() {
-    const data = {
-      message: "Data not found",
-    };
-
-    return data;
-  }
-
   async index(req, res) {
     const students = await Students.all();
-    const data = {
-      message: "Menampilkan data students",
-      data: students,
-    };
 
-    res.json(data);
+    if (students.length > 0) {
+      const data = {
+        message: "Menampilkan data students",
+        data: students,
+      };
+
+      res.status(200).json(data);
+    } else {
+      const data = {
+        message: "Students is empty!",
+      };
+
+      res.status(200).json(data);
+    }
   }
 
   async store(req, res) {
+    const { nama, nim, email, jurusan } = req.body;
+
+    if (!nama | !nim | !email | !jurusan) {
+      const data = {
+        message: "You must send all data!",
+      };
+
+      return res.status(422).json(data);
+    }
+
     const students = await Students.create(req.body);
 
     const data = {

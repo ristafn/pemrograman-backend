@@ -16,6 +16,18 @@ class Students {
     });
   }
 
+  static find(id) {
+    return new Promise((resolve, reject) => {
+      const sql = "SELECT * FROM data_students WHERE id = ?";
+
+      db.query(sql, id, (err, result) => {
+        const [student] = result;
+
+        resolve(student);
+      });
+    });
+  }
+
   static async create(data) {
     const id = await new Promise((resolve, reject) => {
       const sql = "INSERT INTO data_students SET ?";
@@ -30,25 +42,9 @@ class Students {
       });
     });
 
-    return new Promise((resolve, reject) => {
-      const sql = "SELECT * FROM data_students WHERE id = ?";
-      db.query(sql, id, (err, result) => {
-        resolve(result);
-      });
-    });
-  }
+    const student = this.find(id);
 
-  static find(id) {
-    return new Promise((resolve, reject) => {
-      const sql = "SELECT * FROM data_students WHERE id = ?";
-
-      db.query(sql, id, (err, result) => {
-        const [student] = result;
-
-        console.log(result);
-        resolve(student);
-      });
-    });
+    return student;
   }
 
   static async update(id, data) {
